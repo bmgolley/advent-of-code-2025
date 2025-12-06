@@ -1,7 +1,7 @@
 fun main() {
     fun part1(input: List<String>): Int {
         return input.sumOf {
-            val numbers = it.chunked(1).map(String::toInt)
+            val numbers = it.map(Char::digitToInt)
             val max = numbers.dropLast(1).max()
             val iMax = numbers.indexOf(max)
             val max2 = numbers.drop(iMax + 1).max()
@@ -11,7 +11,7 @@ fun main() {
 
     fun part2(input: List<String>): Long {
         return input.sumOf {
-            val numbers = it.chunked(1).map(String::toInt)
+            val numbers = it.map(Char::digitToInt)
             val found = mutableListOf<Int>()
             val end = numbers.size
             var start = 0
