@@ -7,10 +7,8 @@ const val ADJACENT_THRESHOLD = 4
 fun <E> List<E>.safeWindow(idx: Int) = subList(max(idx - 1, 0), min(idx + 1, lastIndex) + 1)
 fun String.safeWindow(idx: Int) = substring(max(idx - 1, 0), min(idx + 1, lastIndex) + 1)
 
-typealias Table<E> = List<MutableList<E>>
-
-operator fun <E> Table<E>.get(i: Int, j: Int) = this[i][j]
-operator fun <E> Table<E>.set(i: Int, j: Int, element: E) = this[i].set(j, element)
+operator fun <E> List<List<E>>.get(i: Int, j: Int) = this[i][j]
+operator fun <E> List<MutableList<E>>.set(i: Int, j: Int, element: E) = this[i].set(j, element)
 
 fun main() {
     fun part1(input: List<String>): Int {
@@ -27,7 +25,7 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        val table: Table<Char> = input.map(String::toMutableList)
+        val table = input.map(String::toMutableList)
         var removed = 0
         do {
             val indexes = mutableListOf<Pair<Int, Int>>()

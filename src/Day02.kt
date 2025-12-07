@@ -6,7 +6,6 @@ fun main() {
         }
     }.sum()
 
-
     fun part2(input: List<String>): Long {
         // yes, regex is a cop-out, but I couldn't think of a better way that wouldn't be a mess
         val regex = """^(\d+)\1+$""".toRegex()
