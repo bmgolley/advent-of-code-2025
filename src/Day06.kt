@@ -6,7 +6,7 @@ fun main() {
             val problem = data.map { it[i] }
             val numbers = problem.dropLast(1).map(String::toLong)
             when (val op = problem.last()) {
-                "*" -> numbers.reduce { acc, n -> n * acc }
+                "*" -> numbers.reduce(Long::times)
                 "+" -> numbers.sum()
                 else -> error("invalid operator '$op'")
             }
@@ -30,7 +30,7 @@ fun main() {
                 strings.mapNotNull { it[i].takeUnless(Char::isWhitespace) }.joinToString("").toLong()
             }
             val value = when (op) {
-                "*" -> numbers.reduce { acc, n -> n * acc }
+                "*" -> numbers.reduce(Long::times)
                 "+" -> numbers.sum()
                 else -> error("invalid operator '$op'")
             }
