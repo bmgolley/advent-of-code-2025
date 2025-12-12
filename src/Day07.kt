@@ -25,13 +25,24 @@ fun main() {
         return count
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun part2(input: List<String>): Long {
+        val startRow = input.first()
+        val pathCount = startRow.map { if (it == 'S') 1L else 0 }.toMutableList()
+        for (row in input.drop(1)) {
+            for ((i, char) in row.withIndex()) {
+                if (char == '^') {
+                    val n = pathCount[i].also { pathCount[i] = 0 }
+                    pathCount[i - 1] += n
+                    pathCount[i + 1] += n
+                }
+            }
+        }
+        return pathCount.sum()
     }
 
     val testInput = readInput("Day07_test")
     check(part1(testInput) == 21)
-//    check(part2(testInput) == 1)
+    check(part2(testInput) == 40L)
 
     val input = readInput("Day07")
     part1(input).println()
