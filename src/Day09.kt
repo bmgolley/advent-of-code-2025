@@ -48,10 +48,7 @@ fun main() {
     }
 
     fun part2(input: List<String>): Long {
-        val points = input.map {
-            val (x, y) = it.split(',').map(String::toInt)
-            Point(x, y)
-        }
+        val points = input.map { val (x, y) = it.split(',').map(String::toInt); Point(x, y) }
 
         val path = Path2D.Double().apply {
             moveTo(points.first())
@@ -61,15 +58,13 @@ fun main() {
             closePath()
         }
 
-        val result = points.subList(0, points.lastIndex).asSequence()
-            .withIndex()
-            .maxOf { (i, point) ->
-                points.asSequence()
-                    .drop(i + 1)
-                    .map(point::toRectangle)
-                    .filter(path::contains)
-                    .maxOfOrNull(Rectangle::area) ?: 0
-            }
+        val result = points.asSequence().withIndex().maxOf { (i, point) ->
+            points.asSequence()
+                .drop(i + 1)
+                .map(point::toRectangle)
+                .filter(path::contains)
+                .maxOfOrNull(Rectangle::area) ?: 0
+        }
         return result
     }
 
